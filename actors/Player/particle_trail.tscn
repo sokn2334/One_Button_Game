@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3wjcr4ijkmak"]
+
+[ext_resource type="Script" path="res://actors/Player/particle_trail.gd" id="1_oku1e"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ukvsc"]
+
+[sub_resource type="Curve" id="Curve_dx7jn"]
+_data = [Vector2(0, 0.932067), 0.0, 0.0, 0, 0, Vector2(0.458101, 0.601663), 0.0, 0.0, 0, 0, Vector2(0.877095, 0.441093), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="ParticleTrail" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_ukvsc")
+amount = 10
+emission_shape = 3
+emission_rect_extents = Vector2(1, 30)
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 300)
+initial_velocity_max = 15.16
+linear_accel_min = 50.51
+linear_accel_max = 50.51
+scale_amount_min = 0.0
+scale_amount_max = 17.65
+scale_amount_curve = SubResource("Curve_dx7jn")
+color = Color(0, 0, 0, 1)
+hue_variation_min = -0.08
+hue_variation_max = -0.07
+script = ExtResource("1_oku1e")

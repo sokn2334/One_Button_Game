@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7k6oobjpf44c"]
+
+[ext_resource type="Texture2D" uid="uid://bicpp1axm421y" path="res://softlight.png" id="1_v4y53"]
+[ext_resource type="Script" path="res://environment/lights.gd" id="1_vh2vb"]
+
+[sub_resource type="Animation" id="Animation_n01t2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights/Softlight:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_v4y53")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lights/Softlight:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.0666027, 0.0666027)]
+}
+
+[sub_resource type="Animation" id="Animation_36c6p"]
+resource_name = "flicker"
+length = 1.875
+loop_mode = 2
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights/Softlight:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_v4y53")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lights/Softlight:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.07, 0.07), Vector2(0.145147, 0.145147)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5w6p"]
+_data = {
+"RESET": SubResource("Animation_n01t2"),
+"flicker": SubResource("Animation_36c6p")
+}
+
+[node name="Lights" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_vh2vb")
+
+[node name="Softlight" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0.8, 0.447059)
+scale = Vector2(0.0666027, 0.0666027)
+texture = ExtResource("1_v4y53")
+
+[node name="StartAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_u5w6p")
+}

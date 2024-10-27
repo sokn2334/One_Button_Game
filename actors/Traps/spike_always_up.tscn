@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5vad8hl6ku1f"]
+
+[ext_resource type="Script" path="res://spike_always_up.gd" id="1_8hds5"]
+[ext_resource type="Texture2D" uid="uid://qu8lu11k85bc" path="res://actors/Traps/Spike_B.png" id="2_68ccu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6nht"]
+size = Vector2(32, 12.5394)
+
+[node name="Spike_always_up" type="Area2D"]
+process_mode = 1
+scale = Vector2(4.504, 4.504)
+collision_layer = 4
+script = ExtResource("1_8hds5")
+
+[node name="Spike" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_68ccu")
+hframes = 10
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.269719)
+shape = SubResource("RectangleShape2D_d6nht")
+
+[node name="Hurt" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Hurt" to="." method="_on_hurt_timeout"]
